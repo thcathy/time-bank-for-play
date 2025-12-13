@@ -16,39 +16,12 @@ Time Bank for Play uses a simple concept: **earn time by focusing, spend time by
 
 ## Features
 
-### Today Screen
-- View current balance with status indicator
-- Quick-add buttons (+15m, +30m, +1h) for Focus and Play
-- **Stopwatch Mode** - Start/stop timers for real-time tracking
-- Today's progress summary
-
-### History Screen
-- Browse all past entries (newest first)
-- Filter by week, month, or all time
-- Edit or delete any entry
-- See cumulative balance for each day
-
-### Analytics Dashboard
-- Weekly bar chart (Focus vs Play)
-- Balance trend line chart (14 days)
-- Time distribution pie chart
-- Stats: Total hours, average delta, positive streak
-
-### Settings
-- Light / Dark / System theme
-- Starting balance configuration
-- Warning threshold
-- Max play per day limit (optional)
-- Allow overdraft toggle
-- Export data to CSV
-- Reset all data
-
-## Screenshots
-
-| Light Mode | Dark Mode |
-|------------|-----------|
-| Today screen with balance | Stopwatch mode |
-| History with entries | Analytics charts |
+- **Tracking**: quick-add entries + stopwatch for real-time Focus/Play tracking
+- **History**: browse, edit, and delete past entries
+- **Analytics**: charts and stats (weekly focus vs play, balance trend, distribution)
+- **Rules**: warning threshold, optional max play/day, allow overdraft toggle
+- **Export**: export all entries to CSV (share sheet)
+- **Local-first**: data stored locally on-device
 
 ## Tech Stack
 
@@ -86,24 +59,57 @@ Time Bank for Play uses a simple concept: **earn time by focusing, spend time by
    flutter run
    ```
 
-### Build for Production
+### Build
 
 ```bash
-# Android APK
-flutter build apk --release
-
 # Android App Bundle
 flutter build appbundle --release
 
-# iOS
-flutter build ios --release
+# iOS IPA
+flutter build ipa --release
 
 # Web
-flutter build web --release
-
-# Windows
-flutter build windows --release
+flutter build web --release --no-wasm-dry-run
 ```
+
+## Deploy (Web)
+
+This repo includes a Cloudflare Pages deploy script:
+
+```bash
+./deploy.sh
+```
+
+It builds `build/web`, copies `privacy-policy.html`, then deploys via Wrangler.
+
+## Release (Mobile)
+
+This repo includes Fastlane lanes in `fastlane/Fastfile`:
+
+```bash
+# Android
+fastlane android beta
+fastlane android release
+
+# iOS
+fastlane ios build
+fastlane ios beta
+fastlane ios release
+```
+
+Notes:
+- **Android**: while the app is still a **Draft app** in Play Console, internal uploads must use `release_status: "draft"` (already configured in `android beta`).
+- **iOS**: you must update identifiers/team/profile names in `fastlane/*` to match your Apple Developer setup if you fork this repo.
+
+## Secrets / signing (do not commit)
+
+These are intentionally gitignored:
+- `android/key.properties`
+- `android/*.jks` (e.g. `android/upload-keystore.jks`)
+- `fastlane/play-store-key.json`
+- `*.p12`, `*.mobileprovision`, `*.cer`, `*.certSigningRequest`
+
+See `android/key.properties.template` for the expected format.
 
 ## Project Structure
 
