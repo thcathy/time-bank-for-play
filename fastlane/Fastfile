@@ -17,7 +17,7 @@ platform :ios do
     
     # Get provisioning profile
     get_provisioning_profile(
-      app_identifier: "com.thcathy.timebankforplay",
+      app_identifier: "com.thcathy.earntimetoplay",
       readonly: true
     )
     
@@ -32,7 +32,7 @@ platform :ios do
         signingStyle: "manual",
         teamID: "DU483K8F48",
         provisioningProfiles: {
-          "com.thcathy.timebankforplay" => "com.thcathy.timebankforplay AppStore"
+          "com.thcathy.earntimetoplay" => "com.thcathy.earntimetoplay AppStore"
         }
       },
       # Add xcargs to disable bitcode if it's causing issues
@@ -57,7 +57,7 @@ platform :ios do
     
     # Get provisioning profile
     get_provisioning_profile(
-      app_identifier: "com.thcathy.timebankforplay",
+      app_identifier: "com.thcathy.earntimetoplay",
       readonly: true
     )
     
@@ -72,7 +72,7 @@ platform :ios do
         signingStyle: "manual",
         teamID: "DU483K8F48",
         provisioningProfiles: {
-          "com.thcathy.timebankforplay" => "com.thcathy.timebankforplay AppStore"
+          "com.thcathy.earntimetoplay" => "com.thcathy.earntimetoplay AppStore"
         }
       },
       # Add xcargs to disable bitcode if it's causing issues
@@ -97,7 +97,7 @@ platform :ios do
 
     # Get provisioning profile
     get_provisioning_profile(
-      app_identifier: "com.thcathy.timebankforplay",
+      app_identifier: "com.thcathy.earntimetoplay",
       readonly: true
     )
     
@@ -111,7 +111,7 @@ platform :ios do
         signingStyle: "manual",
         teamID: "DU483K8F48",
         provisioningProfiles: {
-          "com.thcathy.timebankforplay" => "com.thcathy.timebankforplay AppStore"
+          "com.thcathy.earntimetoplay" => "com.thcathy.earntimetoplay AppStore"
         }
       }
     )

@@ -31,7 +31,7 @@ flutter build ipa --release
 echo ""
 echo "✅ iOS build complete!"
 echo ""
-echo "📦 Output: build/ios/ipa/time_bank_for_play.ipa"
+echo "📦 Output: build/ios/ipa/EarnTimeToPlay.ipa"
 echo ""
 echo "Next steps:"
 echo "1. Open Xcode: open ios/Runner.xcworkspace"

@@ -240,7 +240,7 @@ class SettingsScreen extends ConsumerWidget {
 
   void _exportData(BuildContext context, WidgetRef ref) async {
     final csv = ref.read(timeBankProvider.notifier).exportToCsv();
-    await Share.share(csv, subject: 'Time Bank Data Export');
+    await Share.share(csv, subject: 'Earn Time To Play Data Export');
   }
 
   void _showResetDialog(BuildContext context, WidgetRef ref) {

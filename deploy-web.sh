@@ -5,7 +5,7 @@
 
 set -e  # Exit on any error
 
-PROJECT_NAME="time-bank-for-play"
+PROJECT_NAME="earn-time-to-play"
 BUILD_DIR="build/web"
 
 echo "🚀 Deploying EarnTimeToPlay to Cloudflare Pages"
