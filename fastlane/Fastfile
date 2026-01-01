@@ -15,12 +15,6 @@ platform :ios do
     # Increment build number
     increment_build_number(xcodeproj: "ios/Runner.xcodeproj")
     
-    # Get provisioning profile
-    get_provisioning_profile(
-      app_identifier: "com.thcathy.earntimetoplay",
-      readonly: true
-    )
-    
     # Build the app
     build_app(
       workspace: "ios/Runner.xcworkspace",
@@ -28,15 +22,8 @@ platform :ios do
       export_method: "app-store",
       output_directory: "build/ios",
       output_name: "EarnTimeToPlay.ipa",
-      export_options: {
-        signingStyle: "manual",
-        teamID: "DU483K8F48",
-        provisioningProfiles: {
-          "com.thcathy.earntimetoplay" => "com.thcathy.earntimetoplay AppStore"
-        }
-      },
-      # Add xcargs to disable bitcode if it's causing issues
-      xcargs: "ENABLE_BITCODE=NO"
+      # Automatic signing (let Xcode manage profiles/certs)
+      xcargs: "ENABLE_BITCODE=NO -allowProvisioningUpdates"
     )
     
     # Upload to TestFlight
@@ -55,12 +42,6 @@ platform :ios do
     # Increment build number
     increment_build_number(xcodeproj: "ios/Runner.xcodeproj")
     
-    # Get provisioning profile
-    get_provisioning_profile(
-      app_identifier: "com.thcathy.earntimetoplay",
-      readonly: true
-    )
-    
     # Build the app
     build_app(
       workspace: "ios/Runner.xcworkspace",
@@ -68,15 +49,8 @@ platform :ios do
       export_method: "app-store",
       output_directory: "build/ios",
       output_name: "EarnTimeToPlay.ipa",
-      export_options: {
-        signingStyle: "manual",
-        teamID: "DU483K8F48",
-        provisioningProfiles: {
-          "com.thcathy.earntimetoplay" => "com.thcathy.earntimetoplay AppStore"
-        }
-      },
-      # Add xcargs to disable bitcode if it's causing issues
-      xcargs: "ENABLE_BITCODE=NO"
+      # Automatic signing (let Xcode manage profiles/certs)
+      xcargs: "ENABLE_BITCODE=NO -allowProvisioningUpdates"
     )
     
     # Upload to App Store
@@ -95,25 +69,12 @@ platform :ios do
     # Run CocoaPods with a clean RubyGems env (Fastlane may set GEM_PATH and break `pod`)
     sh "cd ../ios && env -u GEM_HOME -u GEM_PATH -u BUNDLE_GEMFILE pod install"
 
-    # Get provisioning profile
-    get_provisioning_profile(
-      app_identifier: "com.thcathy.earntimetoplay",
-      readonly: true
-    )
-    
     build_app(
       workspace: "ios/Runner.xcworkspace",
       scheme: "Runner",
       export_method: "app-store",
       output_directory: "build/ios",
-      output_name: "EarnTimeToPlay.ipa",
-      export_options: {
-        signingStyle: "manual",
-        teamID: "DU483K8F48",
-        provisioningProfiles: {
-          "com.thcathy.earntimetoplay" => "com.thcathy.earntimetoplay AppStore"
-        }
-      }
+      output_name: "EarnTimeToPlay.ipa"
     )
   end
 end
