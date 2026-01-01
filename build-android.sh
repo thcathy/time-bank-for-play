@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Build Time Bank for Play for Google Play Store
+# Build EarnTimeToPlay for Google Play Store
 # Usage: ./build-android.sh
 
 set -e  # Exit on any error
 
-echo "🤖 Building Time Bank for Play for Android"
+echo "🤖 Building EarnTimeToPlay for Android"
 echo "==========================================="
 
 # Check if key.properties exists

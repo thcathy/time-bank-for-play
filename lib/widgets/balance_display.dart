@@ -27,23 +27,19 @@ class BalanceDisplay extends StatelessWidget {
 
     // Determine colors based on status
     Color statusColor;
-    Color bgColor;
     IconData statusIcon;
     String statusText;
 
     if (isOverdraft) {
       statusColor = AppColors.error;
-      bgColor = AppColors.error.withOpacity(0.1);
       statusIcon = LucideIcons.alertTriangle;
       statusText = l10n?.noPlayTime ?? 'Overdraft – focus to unlock play time';
     } else if (isWarning) {
       statusColor = AppColors.warning;
-      bgColor = AppColors.warning.withOpacity(0.1);
       statusIcon = LucideIcons.alertCircle;
       statusText = l10n?.lowBalance ?? 'Running low – keep focusing!';
     } else {
       statusColor = isDark ? AppColors.focusDark : AppColors.focusLight;
-      bgColor = (isDark ? AppColors.focusDark : AppColors.focusLight).withOpacity(0.1);
       statusIcon = LucideIcons.checkCircle;
       statusText = l10n?.youCanPlay ?? 'Ready to play!';
     }
@@ -89,27 +85,25 @@ class BalanceDisplay extends StatelessWidget {
           const SizedBox(height: 20),
 
           // Status indicator
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            decoration: BoxDecoration(
-              color: bgColor,
-              borderRadius: BorderRadius.circular(12),
-            ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
             child: Row(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
                   statusIcon,
-                  size: 18,
-                  color: statusColor,
+                  size: 16,
+                  color: statusColor.withOpacity(0.8),
                 ),
                 const SizedBox(width: 8),
-                Text(
-                  statusText,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: statusColor,
-                    fontWeight: FontWeight.w500,
+                Flexible(
+                  child: Text(
+                    statusText,
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
               ],

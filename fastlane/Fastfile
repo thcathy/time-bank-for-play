@@ -1,4 +1,4 @@
-# Fastlane configuration for Time Bank for Play
+# Fastlane configuration for EarnTimeToPlay
 # https://docs.fastlane.tools
 
 default_platform(:ios)
@@ -7,6 +7,11 @@ default_platform(:ios)
 platform :ios do
   desc "Build and upload to App Store Connect (TestFlight)"
   lane :beta do
+    # Ensure Flutter deps + CocoaPods are in sync before archiving
+    sh "cd .. && flutter pub get"
+    # Run CocoaPods with a clean RubyGems env (Fastlane may set GEM_PATH and break `pod`)
+    sh "cd ../ios && env -u GEM_HOME -u GEM_PATH -u BUNDLE_GEMFILE pod install"
+
     # Increment build number
     increment_build_number(xcodeproj: "ios/Runner.xcodeproj")
     
@@ -22,7 +27,7 @@ platform :ios do
       scheme: "Runner",
       export_method: "app-store",
       output_directory: "build/ios",
-      output_name: "TimeBankForPlay.ipa",
+      output_name: "EarnTimeToPlay.ipa",
       export_options: {
         signingStyle: "manual",
         teamID: "DU483K8F48",
@@ -42,6 +47,11 @@ platform :ios do
 
   desc "Build and upload to App Store (Production)"
   lane :release do
+    # Ensure Flutter deps + CocoaPods are in sync before archiving
+    sh "cd .. && flutter pub get"
+    # Run CocoaPods with a clean RubyGems env (Fastlane may set GEM_PATH and break `pod`)
+    sh "cd ../ios && env -u GEM_HOME -u GEM_PATH -u BUNDLE_GEMFILE pod install"
+
     # Increment build number
     increment_build_number(xcodeproj: "ios/Runner.xcodeproj")
     
@@ -57,7 +67,7 @@ platform :ios do
       scheme: "Runner",
       export_method: "app-store",
       output_directory: "build/ios",
-      output_name: "TimeBankForPlay.ipa",
+      output_name: "EarnTimeToPlay.ipa",
       export_options: {
         signingStyle: "manual",
         teamID: "DU483K8F48",
@@ -73,13 +83,18 @@ platform :ios do
     # We use upload_to_testflight even for release because it is more reliable for uploading the binary.
     # You can promote the build to App Store from TestFlight later.
     upload_to_testflight(
-      ipa: "build/ios/TimeBankForPlay.ipa",
+      ipa: "build/ios/EarnTimeToPlay.ipa",
       skip_waiting_for_build_processing: true
     )
   end
 
   desc "Build iOS app only (no upload)"
   lane :build do
+    # Ensure Flutter deps + CocoaPods are in sync before archiving
+    sh "cd .. && flutter pub get"
+    # Run CocoaPods with a clean RubyGems env (Fastlane may set GEM_PATH and break `pod`)
+    sh "cd ../ios && env -u GEM_HOME -u GEM_PATH -u BUNDLE_GEMFILE pod install"
+
     # Get provisioning profile
     get_provisioning_profile(
       app_identifier: "com.thcathy.timebankforplay",
@@ -91,7 +106,7 @@ platform :ios do
       scheme: "Runner",
       export_method: "app-store",
       output_directory: "build/ios",
-      output_name: "TimeBankForPlay.ipa",
+      output_name: "EarnTimeToPlay.ipa",
       export_options: {
         signingStyle: "manual",
         teamID: "DU483K8F48",
@@ -154,13 +169,13 @@ lane :build_all do
     scheme: "Runner",
     export_method: "app-store",
     output_directory: "build/ios",
-    output_name: "TimeBankForPlay.ipa"
+    output_name: "EarnTimeToPlay.ipa"
   )
   
   # Build Android
   sh "cd .. && flutter build appbundle --release"
   
   puts "✅ All builds complete!"
-  puts "iOS: build/ios/TimeBankForPlay.ipa"
+  puts "iOS: build/ios/EarnTimeToPlay.ipa"
   puts "Android: build/app/outputs/bundle/release/app-release.aab"
 end

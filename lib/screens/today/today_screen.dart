@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import '../../core/constants.dart';
@@ -56,7 +57,7 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
                 children: [
                   const AppIcon(size: 32),
                   const SizedBox(width: 10),
-                  Text(l10n?.appTitle ?? 'Time Bank for Play'),
+                  Text(l10n?.appTitle ?? 'Earn Time To Play'),
                 ],
               ),
               actions: const [
@@ -456,19 +457,50 @@ class _ManualInput extends StatefulWidget {
 
 class _ManualInputState extends State<_ManualInput> {
   final _controller = TextEditingController();
+  final _focusNode = FocusNode();
+
+  static final List<TextInputFormatter> _minutesInputFormatters = [
+    FilteringTextInputFormatter.digitsOnly,
+  ];
 
   @override
   void dispose() {
     _controller.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
   void _submit() {
-    final value = int.tryParse(_controller.text);
-    if (value != null && value > 0) {
-      widget.onAdd(value);
-      _controller.clear();
+    if (!widget.enabled) {
+      final l10n = AppLocalizations.of(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          content: Text(l10n?.noPlayTime ?? 'No play time available.'),
+        ),
+      );
+      return;
     }
+
+    final value = int.tryParse(_controller.text);
+    if (value == null) return;
+
+    if (value <= 0 || value > AppConstants.maxManualEntryMinutes) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          content: Text(
+            'Enter 1–${AppConstants.maxManualEntryMinutes} minutes.',
+          ),
+        ),
+      );
+      return;
+    }
+
+    widget.onAdd(value);
+    _controller.clear();
+    // Dismiss the keyboard after a successful add.
+    _focusNode.unfocus();
   }
 
   @override
@@ -486,8 +518,11 @@ class _ManualInputState extends State<_ManualInput> {
         Expanded(
           child: TextField(
             controller: _controller,
-            enabled: widget.enabled,
+            focusNode: _focusNode,
+            // Always allow typing; enforce restrictions on submit.
             keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.done,
+            inputFormatters: _minutesInputFormatters,
             decoration: InputDecoration(
               hintText: l10n?.enterMinutes ?? 'Enter minutes',
               suffixText: l10n?.min ?? 'min',
@@ -501,7 +536,7 @@ class _ManualInputState extends State<_ManualInput> {
           color: color.withOpacity(widget.enabled ? 1 : 0.5),
           borderRadius: BorderRadius.circular(12),
           child: InkWell(
-            onTap: widget.enabled ? _submit : null,
+            onTap: _submit,
             borderRadius: BorderRadius.circular(12),
             child: Container(
               padding: const EdgeInsets.all(14),

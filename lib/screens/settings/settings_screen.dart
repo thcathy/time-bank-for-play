@@ -208,7 +208,7 @@ class SettingsScreen extends ConsumerWidget {
                     child: Column(
                       children: [
                         Text(
-                          l10n?.appTitle ?? 'Time Bank for Play',
+                          l10n?.appTitle ?? 'Earn Time To Play',
                           style: theme.textTheme.titleSmall?.copyWith(
                             color: theme.textTheme.bodySmall?.color,
                           ),

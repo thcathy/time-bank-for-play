@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import '../../core/constants.dart';
 import '../../core/theme/colors.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/day_entry.dart';
@@ -327,6 +329,10 @@ class _EditEntrySheetState extends ConsumerState<_EditEntrySheet> {
   late TextEditingController _focusController;
   late TextEditingController _playController;
 
+  static final List<TextInputFormatter> _minutesInputFormatters = [
+    FilteringTextInputFormatter.digitsOnly,
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -348,6 +354,21 @@ class _EditEntrySheetState extends ConsumerState<_EditEntrySheet> {
   void _save() {
     final focus = int.tryParse(_focusController.text) ?? 0;
     final play = int.tryParse(_playController.text) ?? 0;
+
+    if (focus < 0 ||
+        play < 0 ||
+        focus > AppConstants.maxManualEntryMinutes ||
+        play > AppConstants.maxManualEntryMinutes) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          content: Text(
+            'Minutes must be 0–${AppConstants.maxManualEntryMinutes}.',
+          ),
+        ),
+      );
+      return;
+    }
 
     ref.read(timeBankProvider.notifier).updateEntry(
           widget.entry.date,
@@ -443,6 +464,7 @@ class _EditEntrySheetState extends ConsumerState<_EditEntrySheet> {
           TextField(
             controller: _focusController,
             keyboardType: TextInputType.number,
+            inputFormatters: _minutesInputFormatters,
             decoration: InputDecoration(
               prefixIcon: Icon(
                 LucideIcons.bookOpen,
@@ -462,6 +484,7 @@ class _EditEntrySheetState extends ConsumerState<_EditEntrySheet> {
           TextField(
             controller: _playController,
             keyboardType: TextInputType.number,
+            inputFormatters: _minutesInputFormatters,
             decoration: InputDecoration(
               prefixIcon: Icon(
                 LucideIcons.gamepad2,

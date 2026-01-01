@@ -1,4 +1,4 @@
-# Time Bank for Play
+# Earn Time To Play
 
 A Flutter app that helps gamers balance productivity with entertainment by tracking focus time vs play time.
 
@@ -8,7 +8,7 @@ A Flutter app that helps gamers balance productivity with entertainment by track
 
 ## Overview
 
-Time Bank for Play uses a simple concept: **earn time by focusing, spend time by playing**. 
+Earn Time To Play uses a simple concept: **earn time by focusing, spend time by playing**. 
 
 - Focus on productive activities (studying, working, learning) to deposit time into your "bank"
 - Withdraw from your balance when you want to play games
@@ -45,8 +45,8 @@ Time Bank for Play uses a simple concept: **earn time by focusing, spend time by
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/thcathy/time-bank-for-play.git
-   cd time-bank-for-play
+   git clone https://github.com/thcathy/earn-time-to-play.git
+   cd earn-time-to-play
    ```
 
 2. Install dependencies:
@@ -77,7 +77,7 @@ flutter build web --release --no-wasm-dry-run
 This repo includes a Cloudflare Pages deploy script:
 
 ```bash
-./deploy.sh
+./deploy-web.sh
 ```
 
 It builds `build/web`, copies `privacy-policy.html`, then deploys via Wrangler.

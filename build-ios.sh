@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Build Time Bank for Play for iOS App Store
+# Build EarnTimeToPlay for iOS App Store
 # Usage: ./build-ios.sh
 
 set -e  # Exit on any error
 
-echo "🍎 Building Time Bank for Play for iOS"
+echo "🍎 Building EarnTimeToPlay for iOS"
 echo "======================================="
 
 # Step 1: Clean

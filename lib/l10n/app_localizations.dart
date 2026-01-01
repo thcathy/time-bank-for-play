@@ -165,7 +165,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
 
 // English strings
 const Map<String, String> _enStrings = {
-  'appTitle': 'Time Bank for Play',
+  'appTitle': 'Earn Time To Play',
   'today': 'Today',
   'history': 'History',
   'analytics': 'Analytics',
@@ -278,7 +278,7 @@ const Map<String, String> _enStrings = {
 
 // Traditional Chinese strings
 const Map<String, String> _zhTWStrings = {
-  'appTitle': '遊戲時間銀行',
+  'appTitle': '學習時間賺遊戲時間',
   'today': '今天',
   'history': '歷史',
   'analytics': '分析',
@@ -391,7 +391,7 @@ const Map<String, String> _zhTWStrings = {
 
 // Simplified Chinese strings
 const Map<String, String> _zhCNStrings = {
-  'appTitle': '游戏时间银行',
+  'appTitle': '学习时间赚游戏时间',
   'today': '今天',
   'history': '历史',
   'analytics': '分析',

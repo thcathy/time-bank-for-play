@@ -1,12 +1,12 @@
 name: time_bank_for_play
-description: A Flutter app that helps gamers balance productivity with entertainment by tracking focus time vs play time.
+description: Earn Time To Play — a Flutter app that helps gamers balance productivity with entertainment by tracking focus time vs play time.
 publish_to: 'none'
-version: 1.0.0+7
+version: 1.0.1+12
 # Author: Timmy Wong <thcathy@gmail.com>
-# Repository: https://github.com/thcathy/time-bank-for-play
+# Repository: https://github.com/thcathy/earn-time-to-play
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -21,10 +21,10 @@ dependencies:
   fl_chart: ^0.66.0
   lucide_icons: ^0.257.0
   intl: ^0.20.2
-  share_plus: ^7.2.1
-  path_provider: ^2.1.1
+  share_plus: ^10.0.0
+  path_provider: ^2.1.4
   google_fonts: ^6.1.0
-  url_launcher: ^6.2.2
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   flutter_test:

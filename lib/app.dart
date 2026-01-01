@@ -74,7 +74,7 @@ class TimeBankApp extends ConsumerWidget {
     final appLocale = ref.watch(localeProvider);
 
     return MaterialApp.router(
-      title: 'Time Bank for Play',
+      title: 'Earn Time To Play',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,

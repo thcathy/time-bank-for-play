@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# Deploy Time Bank for Play to Cloudflare Pages
-# Usage: ./deploy.sh
+# Deploy EarnTimeToPlay to Cloudflare Pages
+# Usage: ./deploy-web.sh
 
 set -e  # Exit on any error
 
 PROJECT_NAME="time-bank-for-play"
 BUILD_DIR="build/web"
 
-echo "🚀 Deploying Time Bank for Play to Cloudflare Pages"
+echo "🚀 Deploying EarnTimeToPlay to Cloudflare Pages"
 echo "=================================================="
 
 # Step 1: Clean previous build
